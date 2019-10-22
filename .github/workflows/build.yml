@@ -14,7 +14,7 @@ jobs:
         curl -L https://github.com/microsoft/vswhere/releases/download/2.7.1/vswhere.exe --output vswhere.exe
     - name: Restore packages
       run: |
-        nuget restore
+        nuget restore .
     - name: Build
       run: |
         setlocal enabledelayedexpansion
