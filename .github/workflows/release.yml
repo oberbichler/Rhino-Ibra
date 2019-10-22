@@ -1,12 +1,12 @@
 on:
-  release:
-    types: [created]
+  push:
+    tags:
+      - 'v*'
 
 name: Create Release
 
 jobs:
   build:
-    name: Create Release
     runs-on: windows-latest
     steps:
       - name: Checkout code
