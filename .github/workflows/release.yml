@@ -35,19 +35,14 @@ jobs:
           release_name: Release ${{ github.ref }}
           draft: true
           prerelease: false
-      - name: Upload AModelImport
+      - name: Create archive
+        run: |
+          7z a -tzip AModel.zip AModelImport/bin/AModelImport.rhp AModelImport/bin/Newtonsoft.Json.dll
+      - name: Upload
         uses: svenstaro/upload-release-action@v1-release
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: AModelImport/bin/AModelImport.rhp
-          asset_name: AModelImport.rhp
-          tag: ${{ github.ref }}
-          overwrite: true
-      - name: Upload Newtonsoft Json
-        uses: svenstaro/upload-release-action@v1-release
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: AModelImport/bin/Newtonsoft.Json.dll
-          asset_name: Newtonsoft.Json.dll
+          file: AModel.zip
+          asset_name: AModel.zip
           tag: ${{ github.ref }}
           overwrite: true
