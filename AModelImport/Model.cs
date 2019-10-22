@@ -14,7 +14,7 @@ namespace AModelImport
 {
     public class Model
     {
-        static List<Readers.Reader> s_readers;
+        static readonly List<Readers.Reader> s_readers;
 
         static Model()
         {
