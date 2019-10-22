@@ -35,9 +35,11 @@ jobs:
           release_name: Release ${{ github.ref }}
           draft: true
           prerelease: false
-      - name: Upload to release
-        uses: JasonEtco/upload-to-release@master
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v1-release
         with:
-          args: AModelImport/bin/AModelImport.rhp
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: AModelImport/bin/AModelImport.rhp
+          asset_name: AModelImport
+          tag: ${{ github.ref }}
+          overwrite: true
