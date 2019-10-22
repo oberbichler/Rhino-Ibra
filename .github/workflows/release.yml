@@ -22,7 +22,7 @@ jobs:
           nuget restore .
       - name: Patch AssemblyInfo
         run: |
-          python batch_assemblyinfo.py AModelImport\Properties\AssemblyInfo.cs ${{ github.ref }}
+          python tools/batch_assemblyinfo.py AModelImport\Properties\AssemblyInfo.cs ${{ github.ref }}
       - name: Build
         run: |
           setlocal enabledelayedexpansion
