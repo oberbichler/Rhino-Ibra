@@ -101,14 +101,24 @@ namespace AModelImport
             return model;
         }
 
-        public void LoadItems(RhinoDoc document)
+        public void LoadItems(RhinoDoc document, Action<string> unreadableCallback = null)
         {
+            var unreadableTypes = new HashSet<string>();
+
             foreach (var chunck in Chuncks)
             {
                 foreach (var reader in s_readers)
                 {
                     if (reader.TryLoad(chunck, this, document))
                         break;
+
+                    var type = chunck["Type"].As<string>();
+
+                    if (!unreadableTypes.Contains(type))
+                    {
+                        unreadableTypes.Add(type);
+                        unreadableCallback?.Invoke(type);
+                    }
                 }
             }
         }

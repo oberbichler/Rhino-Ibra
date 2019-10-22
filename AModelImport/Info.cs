@@ -38,7 +38,7 @@ namespace AModelImport
                     model = Model.Load(reader);
                 }
 
-                model.LoadItems(document);
+                model.LoadItems(document, o => RhinoApp.WriteLine($"Could not read {o}"));
             }
             catch (Exception ex) when (!System.Diagnostics.Debugger.IsAttached)
             {
