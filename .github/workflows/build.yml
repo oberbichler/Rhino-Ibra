@@ -1,0 +1,23 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: Download vswhere
+      run: |
+        @echo off
+        curl -L https://github.com/microsoft/vswhere/releases/download/2.7.1/vswhere.exe --output vswhere.exe
+    - name: Build
+      run: |
+        @echo off
+        setlocal enabledelayedexpansion
+        for /f "usebackq tokens=*" %%i in (`vswhere -latest -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe`) do (
+          "%%i" %*
+          exit /b !errorlevel!
+        )
