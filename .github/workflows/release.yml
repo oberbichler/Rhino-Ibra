@@ -35,8 +35,9 @@ jobs:
           release_name: Release ${{ github.ref }}
           draft: true
           prerelease: false
-      - uses: Shopify/upload-to-release
+      - name: Upload to release
+        uses: JasonEtco/upload-to-release@master
         with:
-          name: AModelImport
-          path: AModelImport/bin/AModelImport.rhp
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          args: AModelImport/bin/AModelImport.rhp
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
