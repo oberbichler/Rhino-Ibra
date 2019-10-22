@@ -12,7 +12,7 @@ if result:
     major = int(result[1])
     minor = int(result[2])
 
-    print(f'Found version {major}.{minor}')
+    print(f'Found version number {major}.{minor}')
 
     print(f'Patch version number in \'{path}\'...')
 
