@@ -37,7 +37,7 @@ jobs:
           prerelease: false
       - name: Create archive
         run: |
-          7z a -tzip AModel.zip AModelImport/bin/AModelImport.rhp AModelImport/bin/Newtonsoft.Json.dll
+          7z a -tzip AModel.zip ./AModelImport/bin/AModelImport.rhp ./AModelImport/bin/Newtonsoft.Json.dll
       - name: Upload
         uses: svenstaro/upload-release-action@v1-release
         with:
