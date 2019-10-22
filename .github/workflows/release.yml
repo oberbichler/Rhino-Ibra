@@ -1,0 +1,42 @@
+on: pull_request
+
+name: Create Release
+
+jobs:
+  build:
+    name: Create Release
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@master
+      - name: Download vswhere
+        run: |
+          curl -L https://github.com/microsoft/vswhere/releases/download/2.7.1/vswhere.exe --output vswhere.exe
+      - name: Download nuget
+        run: |
+          curl -L https://dist.nuget.org/win-x86-commandline/latest/nuget.exe --output nuget.exe
+      - name: Restore packages
+        run: |
+          nuget restore .
+      - name: Build
+        run: |
+          setlocal enabledelayedexpansion
+          for /f "usebackq tokens=*" %%i in (`vswhere -latest -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe`) do (
+            "%%i" %*
+            exit /b !errorlevel!
+          )
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: true
+          prerelease: false
+      - uses: Shopify/upload-to-release
+        with:
+          name: AModelImport
+          path: AModelImport/bin/AModelImport.rhp
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
