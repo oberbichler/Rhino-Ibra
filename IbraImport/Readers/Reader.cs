@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AModelImport.Readers
+namespace IbraImport.Readers
 {
     abstract class Reader
     {

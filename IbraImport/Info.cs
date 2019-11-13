@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AModelImport
+namespace IbraImport
 {
     public class Info : FileImportPlugIn
     {
@@ -23,7 +23,7 @@ namespace AModelImport
         protected override FileTypeList AddFileTypes(FileReadOptions options)
         {
             var result = new FileTypeList();
-            result.AddFileType("AModel (*.amodel)", "amodel");
+            result.AddFileType("IBRA-Model (*.ibra)", "ibra");
             return result;
         }
 
@@ -42,7 +42,7 @@ namespace AModelImport
             }
             catch (Exception ex) when (!System.Diagnostics.Debugger.IsAttached)
             {
-                Dialogs.ShowMessage(ex.Message, "Error", ShowMessageButton.OK, ShowMessageIcon.Error);
+                Dialogs.ShowMessage(ex.Message, "Import Error", ShowMessageButton.OK, ShowMessageIcon.Error);
 
                 return false;
             }
