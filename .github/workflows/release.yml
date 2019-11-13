@@ -14,15 +14,19 @@ jobs:
       - name: Download vswhere
         run: |
           curl -L https://github.com/microsoft/vswhere/releases/download/2.7.1/vswhere.exe --output vswhere.exe
+        shell: cmd
       - name: Download nuget
         run: |
           curl -L https://dist.nuget.org/win-x86-commandline/latest/nuget.exe --output nuget.exe
+        shell: cmd
       - name: Restore packages
         run: |
           nuget restore .
+        shell: cmd
       - name: Patch AssemblyInfo
         run: |
           python tools/batch_assemblyinfo.py AModelImport\Properties\AssemblyInfo.cs ${{ github.ref }}
+        shell: cmd
       - name: Build
         run: |
           setlocal enabledelayedexpansion
@@ -30,9 +34,11 @@ jobs:
             "%%i" %*
             exit /b !errorlevel!
           )
+        shell: cmd
       - name: Create archive
         run: |
           7z a -tzip AModel.zip ./AModelImport/bin/AModelImport.rhp ./AModelImport/bin/Newtonsoft.Json.dll
+        shell: cmd
       - name: Upload archive
         uses: svenstaro/upload-release-action@v1-release
         with:
