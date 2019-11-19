@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Info.cs" />
     <Compile Include="Readers\CurveReader.cs" />
+    <Compile Include="Readers\SurfaceReader.cs" />
     <Compile Include="Readers\LineReader.cs" />
     <Compile Include="Readers\BoxReader.cs" />
     <Compile Include="Readers\PolylineReader.cs" />
