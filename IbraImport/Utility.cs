@@ -12,12 +12,7 @@ namespace IbraImport
     {
         public static T As<T>(this JToken obj)
         {
-            var value = ((JValue)obj)?.Value;
-
-            if (value is T)
-                return (T)value;
-            else
-                return default;
+            return ((JValue)obj).Value<T>();
         }
 
         public static List<T> AsList<T>(this JToken obj)
