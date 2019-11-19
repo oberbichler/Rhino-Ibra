@@ -27,7 +27,7 @@ namespace IbraImport.Readers
 
                 document.Objects.AddRectangle(rectangle, attributes);
             }
-            else             // 3D
+            else            // 3D
             {
                 var a = data["Min"].AsPoint3d();
                 var b = data["Max"].AsPoint3d();
