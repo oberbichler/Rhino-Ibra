@@ -48,6 +48,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -56,6 +57,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ImportSettingsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImportSettingsDialog.Designer.cs">
+      <DependentUpon>ImportSettingsDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Info.cs" />
     <Compile Include="Readers\CurveReader.cs" />
     <Compile Include="Readers\SurfaceReader.cs" />
@@ -71,6 +78,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ImportSettingsDialog.resx">
+      <DependentUpon>ImportSettingsDialog.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\RhinoCommon.6.18.19266.14201\build\net45\RhinoCommon.targets" Condition="Exists('..\packages\RhinoCommon.6.18.19266.14201\build\net45\RhinoCommon.targets')" />

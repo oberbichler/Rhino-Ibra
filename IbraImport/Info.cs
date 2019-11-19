@@ -23,7 +23,7 @@ namespace IbraImport
         protected override FileTypeList AddFileTypes(FileReadOptions options)
         {
             var result = new FileTypeList();
-            result.AddFileType("IBRA-Model (*.ibra, *.iga)", "ibra", "iga");
+            result.AddFileType("IBRA-Model (*.ibra, *.iga)", "ibra", "iga", true);
             return result;
         }
 
@@ -48,6 +48,12 @@ namespace IbraImport
             }
 
             return true;
+        }
+
+        protected override void DisplayOptionsDialog(IntPtr parent, string description, string extension)
+        {
+            var dialog = new ImportSettingsDialog();
+            dialog.ShowDialog();
         }
     }
 }
