@@ -25,6 +25,7 @@ jobs:
         shell: cmd
       - name: Patch AssemblyInfo
         run: |
+          python tools/batch_assemblyinfo.py IbraExport\Properties\AssemblyInfo.cs ${{ github.ref }}
           python tools/batch_assemblyinfo.py IbraImport\Properties\AssemblyInfo.cs ${{ github.ref }}
         shell: cmd
       - name: Build
