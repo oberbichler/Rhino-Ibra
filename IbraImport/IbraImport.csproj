@@ -7,8 +7,8 @@
     <ProjectGuid>{56BCD31F-71DC-4932-99C3-520478B4B863}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AModelImport</RootNamespace>
-    <AssemblyName>AModelImport</AssemblyName>
+    <RootNamespace>IbraImport</RootNamespace>
+    <AssemblyName>IbraImport</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>

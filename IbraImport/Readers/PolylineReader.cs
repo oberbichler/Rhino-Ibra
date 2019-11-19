@@ -7,35 +7,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AModelImport.Readers
+namespace IbraImport.Readers
 {
-    class LineReader : Reader
+    class PolylineReader : Reader
     {
         public override bool TryLoad(JObject data, Model model, RhinoDoc document)
         {
-            if (!data.HasType(out int index, "Line2D", "Line3D"))
+            if (!data.HasType(out int index, "Polyline2D", "Polyline3D"))
                 return false;
 
             var attributes = GetAttributes(document, data);
 
-            Line line;
+            List<Point3d> points;
 
             if (index == 0) // 2D
             {
-                var a = data["A"].AsPoint2d();
-                var b = data["B"].AsPoint2d();
-
-                line = new Line(a.ToPoint3d(), b.ToPoint3d());
+                points = data["Points"].AsListOfPoint2d()
+                                       .Select(o => o.ToPoint3d())
+                                       .ToList();
             }
             else            // 3D
             {
-                var a = data["A"].AsPoint3d();
-                var b = data["B"].AsPoint3d();
-
-                line = new Line(a, b);
+                points = data["Points"].AsListOfPoint3d();
             }
 
-            document.Objects.AddLine(line, attributes);
+            var id = document.Objects.AddPolyline(points, attributes);
 
             return true;
         }

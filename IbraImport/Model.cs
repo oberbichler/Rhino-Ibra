@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AModelImport
+namespace IbraImport
 {
     public class Model
     {
