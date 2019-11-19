@@ -37,7 +37,7 @@ jobs:
         shell: cmd
       - name: Create archive
         run: |
-          7z a -tzip Rhino-Ibra.zip ./IbraImport/bin/IbraImport.rhp ./IbraImport/bin/Newtonsoft.Json.dll
+          7z a -tzip Rhino-Ibra.zip ./IbraExport/bin/IbraExport.rhp ./IbraImport/bin/IbraImport.rhp ./IbraImport/bin/Newtonsoft.Json.dll
         shell: cmd
       - name: Upload archive
         uses: svenstaro/upload-release-action@v1-release
