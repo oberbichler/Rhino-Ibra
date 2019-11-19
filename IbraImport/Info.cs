@@ -23,7 +23,7 @@ namespace IbraImport
         protected override FileTypeList AddFileTypes(FileReadOptions options)
         {
             var result = new FileTypeList();
-            result.AddFileType("IBRA-Model (*.ibra)", "ibra");
+            result.AddFileType("IBRA-Model (*.ibra, *.iga)", "ibra", "iga");
             return result;
         }
 
