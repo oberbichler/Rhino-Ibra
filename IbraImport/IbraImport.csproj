@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -59,6 +59,7 @@
     <Compile Include="Info.cs" />
     <Compile Include="Readers\CurveReader.cs" />
     <Compile Include="Readers\SurfaceReader.cs" />
+    <Compile Include="Readers\BrepReader.cs" />
     <Compile Include="Readers\LineReader.cs" />
     <Compile Include="Readers\BoxReader.cs" />
     <Compile Include="Readers\PolylineReader.cs" />
