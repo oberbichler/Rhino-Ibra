@@ -90,4 +90,8 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\RhinoCommon.6.18.19266.14201\build\net45\RhinoCommon.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\RhinoCommon.6.18.19266.14201\build\net45\RhinoCommon.targets'))" />
   </Target>
+  <PropertyGroup>
+    <PostBuildEvent>Copy "$(TargetPath)" "$(TargetDir)$(ProjectName).rhp"
+Erase "$(TargetPath)"</PostBuildEvent>
+  </PropertyGroup>
 </Project>
