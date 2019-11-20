@@ -1,0 +1,9 @@
+﻿---
+name: IbraExport
+version: "1.0.0+0"
+authors:
+- Thomas Oberbichler
+description: Export plugin for Isogeometric B-Rep Analysis
+url: https://github.com/oberbichler/Rhino-Ibra
+secret:
+  id: f7d3ca2d-6b4c-4a29-9f6d-e3061a61aaa6
