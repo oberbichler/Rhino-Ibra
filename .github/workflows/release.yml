@@ -21,13 +21,11 @@ jobs:
         shell: cmd
       - name: Restore packages
         run: |
-          nuget restore .
-        shell: cmd
+          .\nuget restore .
       - name: Patch AssemblyInfo
         run: |
-          python tools/batch_assemblyinfo.py IbraExport\Properties\AssemblyInfo.cs ${{ github.ref }}
-          python tools/batch_assemblyinfo.py IbraImport\Properties\AssemblyInfo.cs ${{ github.ref }}
-        shell: cmd
+          .\script\patch_assemblyinfo.ps1 -tag ${{ github.ref }} -path .\IbraExport
+          .\script\patch_assemblyinfo.ps1 -tag ${{ github.ref }} -path .\IbraImport
       - name: Build
         run: |
           setlocal enabledelayedexpansion
@@ -48,3 +46,9 @@ jobs:
           asset_name: Rhino-Ibra.zip
           tag: ${{ github.ref }}
           overwrite: true
+      - name: Create and publish yak packages
+        env:
+          YAK_TOKEN: ${{ secrets.YAK_TOKEN }}
+        run: |
+          .\script\deploy_yak.ps1 -tag ${{ github.ref }} -path .\IbraExport
+          .\script\deploy_yak.ps1 -tag ${{ github.ref }} -path .\IbraImport
