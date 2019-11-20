@@ -1,6 +1,6 @@
 ﻿---
 name: IbraImport
-version: "1.0.0+0"
+version: 1.0.0+0
 authors:
 - Thomas Oberbichler
 description: Import plugin for Isogeometric B-Rep Analysis
