@@ -4,6 +4,12 @@
 
 ## Installation
 
+### Rhino Pakage Manager
+- Run `_TestPackageManager` in Rhino
+- Search for `Ibra`
+- Download and Install `IbraExport` and `IbraImport`
+
+### Manual
 - Download `Rhino-Ibra.zip`from the [latest release](https://github.com/oberbichler/Rhino-Ibra/releases/latest)
 - Unblock the `zip`-file (right-click the file > Properties > Unblock > OK)
 - Extract the content of the `zip`-file
