@@ -7,7 +7,7 @@ param(
 
 $ErrorActionPreference = "Stop"
 
-$success = $tag -match "^v(\d+)(?:\.(\d+)(?:\.(\d+)(?:\.(\d+))?)?)?$"
+$success = $tag -match "v(\d+)(?:\.(\d+)(?:\.(\d+)(?:\.(\d+))?)?)?$"
 
 if ((-Not $success) -or ($Matches.Count -lt 2) -or ($Matches.Count -gt 5)) {
     $(throw "Invalid tag")
