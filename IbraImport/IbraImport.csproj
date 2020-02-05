@@ -64,7 +64,9 @@
       <DependentUpon>ImportSettingsDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Info.cs" />
+    <Compile Include="Readers\NurbsCurveGeometryReader.cs" />
     <Compile Include="Readers\CurveReader.cs" />
+    <Compile Include="Readers\NurbsSurfaceGeometryReader.cs" />
     <Compile Include="Readers\SurfaceReader.cs" />
     <Compile Include="Readers\BrepReader.cs" />
     <Compile Include="Readers\LineReader.cs" />
