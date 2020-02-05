@@ -11,6 +11,8 @@ namespace IbraImport.Readers
 {
     class BoxReader : Reader
     {
+        public override string Name => "BoxReader";
+
         public override bool TryLoad(JObject data, Model model, RhinoDoc document)
         {
             if (!data.HasType(out int index, "Box2D", "Box3D"))

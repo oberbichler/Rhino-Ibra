@@ -10,8 +10,24 @@ using System.Threading.Tasks;
 
 namespace IbraImport.Readers
 {
-    abstract class Reader
+    public abstract class Reader
     {
+        public abstract string Name { get; }
+
+        protected virtual bool IsActiveByDefault => true;
+
+        public bool IsActive
+        {
+            get
+            {
+                return Info.Instance.Settings.GetBool($"Enable{Name}", IsActiveByDefault);
+            }
+            set
+            {
+                Info.Instance.Settings.SetBool($"Enable{Name}", value);
+            }
+        }
+
         public static ObjectAttributes GetAttributes(RhinoDoc document, JObject data)
         {
             var attributes = document.CreateDefaultAttributes();

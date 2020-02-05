@@ -14,7 +14,7 @@ namespace IbraImport
 {
     public class Model
     {
-        static List<Readers.Reader> s_readers;
+        private static List<Readers.Reader> s_readers;
 
         static Model()
         {
@@ -23,6 +23,8 @@ namespace IbraImport
                                               .Select(o => (Readers.Reader)Activator.CreateInstance(o))
                                               .ToList();
         }
+
+        public static IEnumerable<Readers.Reader> Readers => s_readers;
 
         public int Version { get; private set; }
 
@@ -107,7 +109,7 @@ namespace IbraImport
             {
                 foreach (var reader in s_readers)
                 {
-                    if (reader.TryLoad(chunck, this, document))
+                    if (reader.IsActive && reader.TryLoad(chunck, this, document))
                         break;
                 }
             }

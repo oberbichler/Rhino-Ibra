@@ -11,6 +11,8 @@ namespace IbraImport.Readers
 {
     class PointReader : Reader
     {
+        public override string Name => "PointReader";
+
         public override bool TryLoad(JObject data, Model model, RhinoDoc document)
         {
             if (!data.HasType(out int index, "Point2D", "Point3D"))

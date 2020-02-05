@@ -11,6 +11,8 @@ namespace IbraImport.Readers
 {
     class CurveReader : Reader
     {
+        public override string Name => "CurveReader";
+
         public override bool TryLoad(JObject data, Model model, RhinoDoc document)
         {
             if (!data.HasType(out int index, "Curve2D", "Curve3D"))

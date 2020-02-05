@@ -11,6 +11,8 @@ namespace IbraImport.Readers
 {
     class SurfaceReader : Reader
     {
+        public override string Name => "SurfaceReader";
+
         public override bool TryLoad(JObject data, Model model, RhinoDoc document)
         {
             if (!data.HasType(out int index, "Surface2D", "Surface3D"))

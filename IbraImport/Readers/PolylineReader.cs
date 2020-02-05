@@ -11,6 +11,8 @@ namespace IbraImport.Readers
 {
     class PolylineReader : Reader
     {
+        public override string Name => "PolylineReader";
+
         public override bool TryLoad(JObject data, Model model, RhinoDoc document)
         {
             if (!data.HasType(out int index, "Polyline2D", "Polyline3D"))

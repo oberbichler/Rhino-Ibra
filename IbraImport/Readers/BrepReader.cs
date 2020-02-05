@@ -11,6 +11,8 @@ namespace IbraImport.Readers
 {
     class BrepReader : Reader
     {
+        public override string Name => "BrepReader";
+
         public override bool TryLoad(JObject data, Model model, RhinoDoc document)
         {
             if (!data.HasType("Brep"))

@@ -11,6 +11,8 @@ namespace IbraImport.Readers
 {
     class LineReader : Reader
     {
+        public override string Name => "LineReader";
+
         public override bool TryLoad(JObject data, Model model, RhinoDoc document)
         {
             if (!data.HasType(out int index, "Line2D", "Line3D"))
