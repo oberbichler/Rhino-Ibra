@@ -33,6 +33,16 @@ namespace IbraExport.Writers
 
         protected void DumpNurbsSurface3D(Item item, NurbsSurface nurbsSurface)
         {
+            if (Info.Instance.Settings.GetBool("EnableMinPolynomialDegree", false))
+            {
+                nurbsSurface = (NurbsSurface)nurbsSurface.Duplicate();
+
+                var minPolynomialDegree = Info.Instance.Settings.GetInteger("MinPolynomialDegree", 1);
+
+                nurbsSurface.IncreaseDegreeU(minPolynomialDegree);
+                nurbsSurface.IncreaseDegreeV(minPolynomialDegree);
+            }
+
             if (Info.Instance.Settings.GetBool("EnableMaxElementSize", false))
             {
                 var maxElementSize = Info.Instance.Settings.GetDouble("MaxElementSize", 10.0);
