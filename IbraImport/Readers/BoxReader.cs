@@ -15,15 +15,15 @@ namespace IbraImport.Readers
 
         public override bool TryLoad(JObject data, Model model, RhinoDoc document)
         {
-            if (!data.HasType(out int index, "Box2D", "Box3D"))
+            if (!data.HasType(out int index, "box_2d", "box_3d"))
                 return false;
 
             var attributes = GetAttributes(document, data);
 
             if (index == 0) // 2D
             {
-                var a = data["Min"].AsPoint2d();
-                var b = data["Max"].AsPoint2d();
+                var a = data["min"].AsPoint2d();
+                var b = data["max"].AsPoint2d();
 
                 var rectangle = new Rectangle3d(Plane.WorldXY, a.ToPoint3d(), b.ToPoint3d());
 
@@ -31,8 +31,8 @@ namespace IbraImport.Readers
             }
             else            // 3D
             {
-                var a = data["Min"].AsPoint3d();
-                var b = data["Max"].AsPoint3d();
+                var a = data["min"].AsPoint3d();
+                var b = data["max"].AsPoint3d();
 
                 var bbox = new BoundingBox(a, b);
                 var box = new Box(bbox);

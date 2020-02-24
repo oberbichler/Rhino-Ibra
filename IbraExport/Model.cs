@@ -55,8 +55,8 @@ namespace IbraExport
                 {
                     writer.WriteStartObject();
 
-                    Write(writer, "Key", item.Key);
-                    Write(writer, "Type", item.Type);
+                    Write(writer, "key", item.Key);
+                    Write(writer, "type", item.Type);
 
                     foreach (var property in item)
                         Write(writer, property.Key, property.Value);

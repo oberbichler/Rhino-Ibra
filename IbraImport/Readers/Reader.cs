@@ -32,10 +32,10 @@ namespace IbraImport.Readers
         {
             var attributes = document.CreateDefaultAttributes();
 
-            if (data.TryGetValue<string>("Key", out var key))
+            if (data.TryGetValue<string>("key", out var key))
                 attributes.Name = key;
 
-            if (data.TryGetValue<string>("Color", out var color))
+            if (data.TryGetValue<string>("color", out var color))
             {
                 var argb = int.Parse(color.Replace("#", ""), System.Globalization.NumberStyles.HexNumber);
 
@@ -43,7 +43,7 @@ namespace IbraImport.Readers
                 attributes.ObjectColor = System.Drawing.Color.FromArgb(argb);
             }
 
-            if (data.TryGetValue<string>("Layer", out var layer))
+            if (data.TryGetValue<string>("layer", out var layer))
             {
                 var layerIndex = document.Layers.FindByFullPath(layer, RhinoMath.UnsetIntIndex);
 
@@ -53,13 +53,13 @@ namespace IbraImport.Readers
                 attributes.LayerIndex = layerIndex;
             }
 
-            if (data.TryGetValue<string>("Arrowhead", out var arrowhead))
+            if (data.TryGetValue<string>("arrowhead", out var arrowhead))
             {
-                if (arrowhead == "Start")
+                if (arrowhead == "start")
                     attributes.ObjectDecoration = ObjectDecoration.StartArrowhead;
-                if (arrowhead == "End")
+                if (arrowhead == "end")
                     attributes.ObjectDecoration = ObjectDecoration.EndArrowhead;
-                if (arrowhead == "Both")
+                if (arrowhead == "both")
                     attributes.ObjectDecoration = ObjectDecoration.BothArrowhead;
             }
 
@@ -68,11 +68,11 @@ namespace IbraImport.Readers
 
         protected NurbsCurve GetNurbsCurve2D(JObject data)
         {
-            var degree = data["Degree"].As<int>();
-            var nbPoles = data["NbPoles"].As<int>();
-            var knots = data["Knots"].AsList<double>();
-            var poles = data["Poles"].AsListOfPoint2d();
-            var isRational = data.ContainsKey("Weights");
+            var degree = data["degree"].As<int>();
+            var nbPoles = data["nb_poles"].As<int>();
+            var knots = data["knots"].AsList<double>();
+            var poles = data["poles"].AsListOfPoint2d();
+            var isRational = data.ContainsKey("weights");
 
             var nurbs = new NurbsCurve(3, isRational, degree + 1, nbPoles);
 
@@ -81,7 +81,7 @@ namespace IbraImport.Readers
 
             if (isRational)
             {
-                var weights = data["Weights"].AsList<double>();
+                var weights = data["weights"].AsList<double>();
 
                 for (int i = 0; i < weights.Count; i++)
                 {
@@ -106,11 +106,11 @@ namespace IbraImport.Readers
 
         protected NurbsCurve GetNurbsCurve3D(JObject data)
         {
-            var degree = data["Degree"].As<int>();
-            var nbPoles = data["NbPoles"].As<int>();
-            var knots = data["Knots"].AsList<double>();
-            var poles = data["Poles"].AsListOfPoint3d();
-            var isRational = data.ContainsKey("Weights");
+            var degree = data["degree"].As<int>();
+            var nbPoles = data["nb_poles"].As<int>();
+            var knots = data["knots"].AsList<double>();
+            var poles = data["poles"].AsListOfPoint3d();
+            var isRational = data.ContainsKey("weights");
 
             var nurbs = new NurbsCurve(3, isRational, degree + 1, nbPoles);
 
@@ -119,7 +119,7 @@ namespace IbraImport.Readers
 
             if (isRational)
             {
-                var weights = data["Weights"].AsList<double>();
+                var weights = data["weights"].AsList<double>();
 
                 for (int i = 0; i < weights.Count; i++)
                 {
@@ -144,14 +144,14 @@ namespace IbraImport.Readers
 
         protected NurbsSurface GetNurbsSurface2D(JObject data)
         {
-            var degreeU = data["DegreeU"].As<int>();
-            var degreeV = data["DegreeV"].As<int>();
-            var nbPolesU = data["NbPolesU"].As<int>();
-            var nbPolesV = data["NbPolesV"].As<int>();
-            var knotsU = data["KnotsU"].AsList<double>();
-            var knotsV = data["KnotsV"].AsList<double>();
-            var poles = data["Poles"].AsListOfPoint2d();
-            var isRational = data.ContainsKey("Weights");
+            var degreeU = data["degree_u"].As<int>();
+            var degreeV = data["degree_v"].As<int>();
+            var nbPolesU = data["nb_poles_u"].As<int>();
+            var nbPolesV = data["nb_poles_v"].As<int>();
+            var knotsU = data["knots_u"].AsList<double>();
+            var knotsV = data["knots_v"].AsList<double>();
+            var poles = data["poles"].AsListOfPoint2d();
+            var isRational = data.ContainsKey("weights");
 
             var nurbs = NurbsSurface.Create(3, isRational, degreeU + 1, degreeV + 1, nbPolesU, nbPolesV);
 
@@ -163,7 +163,7 @@ namespace IbraImport.Readers
 
             if (isRational)
             {
-                var weights = data["Weights"].AsList<double>();
+                var weights = data["weights"].AsList<double>();
 
                 for (int i = 0; i < weights.Count; i++)
                 {
@@ -197,14 +197,14 @@ namespace IbraImport.Readers
 
         protected NurbsSurface GetNurbsSurface3D(JObject data)
         {
-            var degreeU = data["DegreeU"].As<int>();
-            var degreeV = data["DegreeV"].As<int>();
-            var nbPolesU = data["NbPolesU"].As<int>();
-            var nbPolesV = data["NbPolesV"].As<int>();
-            var knotsU = data["KnotsU"].AsList<double>();
-            var knotsV = data["KnotsV"].AsList<double>();
-            var poles = data["Poles"].AsListOfPoint3d();
-            var isRational = data.ContainsKey("Weights");
+            var degreeU = data["degree_u"].As<int>();
+            var degreeV = data["degree_v"].As<int>();
+            var nbPolesU = data["nb_poles_u"].As<int>();
+            var nbPolesV = data["nb_poles_v"].As<int>();
+            var knotsU = data["knots_u"].AsList<double>();
+            var knotsV = data["knots_v"].AsList<double>();
+            var poles = data["poles"].AsListOfPoint3d();
+            var isRational = data.ContainsKey("weights");
 
             var nurbs = NurbsSurface.Create(3, isRational, degreeU + 1, degreeV + 1, nbPolesU, nbPolesV);
 
@@ -216,7 +216,7 @@ namespace IbraImport.Readers
 
             if (isRational)
             {
-                var weights = data["Weights"].AsList<double>();
+                var weights = data["weights"].AsList<double>();
 
                 for (int i = 0; i < weights.Count; i++)
                 {

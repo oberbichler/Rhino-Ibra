@@ -15,14 +15,14 @@ namespace IbraImport.Readers
 
         public override bool TryLoad(JObject data, Model model, RhinoDoc document)
         {
-            if (!data.HasType(out int index, "Surface2D", "Surface3D"))
+            if (!data.HasType(out int index, "surface_2d", "surface_3d"))
                 return false;
 
             var attributes = GetAttributes(document, data);
 
             if (index == 0) // 2D
             {
-                var geometryKey = data["Geometry"].As<string>();
+                var geometryKey = data["geometry"].As<string>();
 
                 var geometry = GetNurbsSurface2D(model[geometryKey]);
 
@@ -30,7 +30,7 @@ namespace IbraImport.Readers
             }
             else            // 3D
             {
-                var geometryKey = data["Geometry"].As<string>();
+                var geometryKey = data["geometry"].As<string>();
 
                 var geometry = GetNurbsSurface3D(model[geometryKey]);
 

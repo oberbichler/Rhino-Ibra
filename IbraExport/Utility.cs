@@ -11,7 +11,7 @@ namespace IbraExport
             var key = obj.Attributes.Name;
 
             if (string.IsNullOrWhiteSpace(key))
-                key = $"Rhino<{obj.Id}>";
+                key = $"rhino<{obj.Id}>";
 
             return key;
         }

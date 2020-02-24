@@ -40,9 +40,9 @@ namespace IbraImport
 
         public void Add(JObject chunk)
         {
-            if (chunk.ContainsKey("Key"))
+            if (chunk.ContainsKey("key"))
             {
-                var key = chunk["Key"].Value<string>();
+                var key = chunk["key"].Value<string>();
                 var index = Chuncks.Count();
                 _keys.Add(key, index);
             }

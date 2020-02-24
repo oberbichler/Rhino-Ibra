@@ -15,9 +15,9 @@ namespace IbraExport.Writers
 
             var key = obj.GetKey();
 
-            var item = new Item(key, "Point3D");
+            var item = new Item(key, "point_3d");
 
-            item.Set("Location", point.Location);
+            item.Set("location", point.Location);
 
             model.Items.Add(item);
 

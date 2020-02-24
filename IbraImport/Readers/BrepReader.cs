@@ -15,7 +15,7 @@ namespace IbraImport.Readers
 
         public override bool TryLoad(JObject data, Model model, RhinoDoc document)
         {
-            if (!data.HasType("Brep"))
+            if (!data.HasType("brep"))
                 return false;
 
             var attributes = GetAttributes(document, data);
@@ -23,19 +23,19 @@ namespace IbraImport.Readers
             var curves2d = new Dictionary<string, NurbsCurve>();
             var surfaces = new Dictionary<string, NurbsSurface>();
 
-            foreach (var faceKey in data["Faces"].AsList<string>())
+            foreach (var faceKey in data["faces"].AsList<string>())
             {
                 var faceData = model[faceKey];
 
                 var loops = new List<List<Curve>>();
 
-                foreach (var loopKey in faceData["Loops"].AsList<string>())
+                foreach (var loopKey in faceData["loops"].AsList<string>())
                 {
                     var loop = new List<Curve>();
 
-                    foreach (var trimKey in model[loopKey]["Trims"].AsList<string>())
+                    foreach (var trimKey in model[loopKey]["trims"].AsList<string>())
                     {
-                        var curveKey = model[trimKey]["Geometry"].As<string>();
+                        var curveKey = model[trimKey]["geometry"].As<string>();
 
                         if (!curves2d.TryGetValue(curveKey, out NurbsCurve curve))
                         {
@@ -49,7 +49,7 @@ namespace IbraImport.Readers
                     loops.Add(loop);
                 }
 
-                var surfaceKey = faceData["Geometry"].As<string>();
+                var surfaceKey = faceData["geometry"].As<string>();
 
                 if (!surfaces.TryGetValue(surfaceKey, out NurbsSurface surface))
                 {
@@ -76,8 +76,8 @@ namespace IbraImport.Readers
 
                 brep.Faces[0].RebuildEdges(document.ModelAbsoluteTolerance, true, true);
 
-                if (faceData.ContainsKey("Key"))
-                    attributes.Name = faceData["Key"].As<string>();
+                if (faceData.ContainsKey("key"))
+                    attributes.Name = faceData["key"].As<string>();
 
                 document.Objects.Add(brep, attributes);
             }

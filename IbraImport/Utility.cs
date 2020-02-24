@@ -75,7 +75,7 @@ namespace IbraImport
         
         public static bool HasType(this JObject obj, string type)
         {
-            if (obj.TryGetValue<string>("Type", out var value))
+            if (obj.TryGetValue<string>("type", out var value))
                 return value == type;
             else
                 throw new Exception("Type attribute is missing");
@@ -83,7 +83,7 @@ namespace IbraImport
 
         public static bool HasType(this JObject obj, out int index, params string[] types)
         {
-            if (obj.TryGetValue<string>("Type", out var value))
+            if (obj.TryGetValue<string>("type", out var value))
             {
                 index = Array.IndexOf(types, value);
                 return index >= 0;

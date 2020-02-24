@@ -15,7 +15,7 @@ namespace IbraImport.Readers
 
         public override bool TryLoad(JObject data, Model model, RhinoDoc document)
         {
-            if (!data.HasType(out int index, "Polyline2D", "Polyline3D"))
+            if (!data.HasType(out int index, "polyline_2d", "polyline_3d"))
                 return false;
 
             var attributes = GetAttributes(document, data);
@@ -24,13 +24,13 @@ namespace IbraImport.Readers
 
             if (index == 0) // 2D
             {
-                points = data["Points"].AsListOfPoint2d()
+                points = data["points"].AsListOfPoint2d()
                                        .Select(o => o.ToPoint3d())
                                        .ToList();
             }
             else            // 3D
             {
-                points = data["Points"].AsListOfPoint3d();
+                points = data["points"].AsListOfPoint3d();
             }
 
             var id = document.Objects.AddPolyline(points, attributes);

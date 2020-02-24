@@ -11,24 +11,24 @@ namespace IbraExport.Writers
 
         protected void DumpNurbsCurve2D(Item item, NurbsCurve curve)
         {
-            item.Set("Degree", curve.Degree);
-            item.Set("Knots", curve.Knots);
-            item.Set("NbPoles", curve.Points.Count);
-            item.Set("Poles", curve.Points.Select(o => o.Location));
+            item.Set("degree", curve.Degree);
+            item.Set("knots", curve.Knots);
+            item.Set("nb_poles", curve.Points.Count);
+            item.Set("poles", curve.Points.Select(o => o.Location));
 
             if (curve.IsRational)
-                item.Set("Weights", curve.Points.Select(o => o.Weight));
+                item.Set("weights", curve.Points.Select(o => o.Weight));
         }
 
         protected void DumpNurbsCurve3D(Item item, NurbsCurve nurbsCurve)
         {
-            item.Set("Degree", nurbsCurve.Degree);
-            item.Set("Knots", nurbsCurve.Knots);
-            item.Set("NbPoles", nurbsCurve.Points.Count);
-            item.Set("Poles", nurbsCurve.Points.Select(o => o.Location));
+            item.Set("degree", nurbsCurve.Degree);
+            item.Set("knots", nurbsCurve.Knots);
+            item.Set("nb_poles", nurbsCurve.Points.Count);
+            item.Set("poles", nurbsCurve.Points.Select(o => o.Location));
 
             if (nurbsCurve.IsRational)
-                item.Set("Weights", nurbsCurve.Points.Select(o => o.Weight));
+                item.Set("weights", nurbsCurve.Points.Select(o => o.Weight));
         }
 
         protected void DumpNurbsSurface3D(Item item, NurbsSurface nurbsSurface)
@@ -50,16 +50,16 @@ namespace IbraExport.Writers
                 nurbsSurface = Utility.RefineSurface(nurbsSurface, maxElementSize);
             }
 
-            item.Set("DegreeU", nurbsSurface.Degree(0));
-            item.Set("DegreeV", nurbsSurface.Degree(1));
-            item.Set("KnotsU", nurbsSurface.KnotsU);
-            item.Set("KnotsV", nurbsSurface.KnotsV);
-            item.Set("NbPolesU", nurbsSurface.Points.CountU);
-            item.Set("NbPolesV", nurbsSurface.Points.CountV);
-            item.Set("Poles", nurbsSurface.Points.Select(o => o.Location));
+            item.Set("degree_u", nurbsSurface.Degree(0));
+            item.Set("degree_v", nurbsSurface.Degree(1));
+            item.Set("knots_u", nurbsSurface.KnotsU);
+            item.Set("knots_v", nurbsSurface.KnotsV);
+            item.Set("nb_poles_u", nurbsSurface.Points.CountU);
+            item.Set("nb_poles_v", nurbsSurface.Points.CountV);
+            item.Set("poles", nurbsSurface.Points.Select(o => o.Location));
 
             if (nurbsSurface.IsRational)
-                item.Set("Weights", nurbsSurface.Points.Select(o => o.Weight));
+                item.Set("weights", nurbsSurface.Points.Select(o => o.Weight));
         }
     }
 }

@@ -15,7 +15,7 @@ namespace IbraImport.Readers
 
         public override bool TryLoad(JObject data, Model model, RhinoDoc document)
         {
-            if (!data.HasType(out int index, "Point2D", "Point3D"))
+            if (!data.HasType(out int index, "point_2d", "point_3d"))
                 return false;
 
             var attributes = GetAttributes(document, data);
@@ -23,11 +23,11 @@ namespace IbraImport.Readers
             Point3d location;
 
             if (index == 0) // 2D
-                location = data["Location"].AsPoint2d().ToPoint3d();
+                location = data["location"].AsPoint2d().ToPoint3d();
             else            // 3D
-                location = data["Location"].AsPoint3d();
+                location = data["location"].AsPoint3d();
 
-            if (data.TryGetValue<string>("Text", out var text))
+            if (data.TryGetValue<string>("text", out var text))
                 document.Objects.AddTextDot(text, location, attributes);
             else
                 document.Objects.AddPoint(location, attributes);
