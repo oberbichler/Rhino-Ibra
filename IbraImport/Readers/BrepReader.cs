@@ -15,7 +15,7 @@ namespace IbraImport.Readers
 
         public override bool TryLoad(JObject data, Model model, RhinoDoc document)
         {
-            if (!data.HasType("brep"))
+            if (!data.HasType("Brep"))
                 return false;
 
             var attributes = GetAttributes(document, data);

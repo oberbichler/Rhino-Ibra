@@ -20,10 +20,10 @@ namespace IbraExport.Writers
 
             var surfaceKey = obj.GetKey();
 
-            var geometryItem = new Item($"{surfaceKey}.nurbs_surface_geometry_3d", "nurbs_surface_geometry_3d");
+            var geometryItem = new Item($"{surfaceKey}.NurbsSurfaceGeometry3D", "NurbsSurfaceGeometry3D");
             DumpNurbsSurface3D(geometryItem, surface.ToNurbsSurface(document.ModelAbsoluteTolerance, out var _));
 
-            var surfaceItem = new Item(surfaceKey, "surface_3d");
+            var surfaceItem = new Item(surfaceKey, "Surface3D");
             surfaceItem.Set("geometry", geometryItem.Key);
             surfaceItem.Set("domain_u", surface.Domain(0));
             surfaceItem.Set("domain_v", surface.Domain(1));

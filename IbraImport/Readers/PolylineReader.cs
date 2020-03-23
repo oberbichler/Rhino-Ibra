@@ -15,7 +15,7 @@ namespace IbraImport.Readers
 
         public override bool TryLoad(JObject data, Model model, RhinoDoc document)
         {
-            if (!data.HasType(out int index, "polyline_2d", "polyline_3d"))
+            if (!data.HasType(out int index, "Polyline2D", "Polyline3D"))
                 return false;
 
             var attributes = GetAttributes(document, data);
