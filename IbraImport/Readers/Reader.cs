@@ -4,6 +4,7 @@ using Rhino.DocObjects;
 using Rhino.Geometry;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,6 +29,38 @@ namespace IbraImport.Readers
             }
         }
 
+
+        public static Layer CreateLayer(RhinoDoc document, string path)
+        {
+            var components = path.Split('/');
+
+            return CreateLayer(document, components);
+        }
+
+        public static Layer CreateLayer(RhinoDoc document, string[] components)
+        {
+            var layerIndex = document.Layers.FindByFullPath(string.Join("::", components), RhinoMath.UnsetIntIndex);
+
+            if (layerIndex != RhinoMath.UnsetIntIndex)
+                return document.Layers[layerIndex];
+
+            if (components.Length == 1)
+            {
+                layerIndex = document.Layers.Add(components[0], Color.Black);
+                return document.Layers[layerIndex];
+            }
+
+            var parent = CreateLayer(document, components.Take(components.Length - 1).ToArray());
+
+            layerIndex = document.Layers.Add(components.Last(), Color.Black);
+            
+            var layer = document.Layers[layerIndex];
+            
+            layer.ParentLayerId = parent.Id;
+
+            return layer;
+        }
+
         public static ObjectAttributes GetAttributes(RhinoDoc document, JObject data)
         {
             var attributes = document.CreateDefaultAttributes();
@@ -45,12 +78,7 @@ namespace IbraImport.Readers
 
             if (data.TryGetValue<string>("layer", out var layer))
             {
-                var layerIndex = document.Layers.FindByFullPath(layer, RhinoMath.UnsetIntIndex);
-
-                if (layerIndex == RhinoMath.UnsetIntIndex)
-                    layerIndex = document.Layers.Add(layer, System.Drawing.Color.Black);
-
-                attributes.LayerIndex = layerIndex;
+                attributes.LayerIndex = CreateLayer(document, layer).Index;
             }
 
             if (data.TryGetValue<string>("arrowhead", out var arrowhead))
