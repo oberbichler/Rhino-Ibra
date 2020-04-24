@@ -14,7 +14,7 @@ namespace IbraExport.Writers
             item.Set("degree", curve.Degree);
             item.Set("knots", curve.Knots);
             item.Set("nb_poles", curve.Points.Count);
-            item.Set("poles", curve.Points.Select(o => o.Location));
+            item.Set("poles", curve.Points.Select(o => o.Location.ToPoint2d()));
 
             if (curve.IsRational)
                 item.Set("weights", curve.Points.Select(o => o.Weight));
