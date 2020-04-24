@@ -68,5 +68,10 @@ namespace IbraExport
 
             return refindeNurbsSurface;
         }
+
+        public static Point2d ToPoint2d(this Point3d point)
+        {
+            return new Point2d(point.X, point.Y);
+        }
     }
 }
