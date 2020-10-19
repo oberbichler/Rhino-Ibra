@@ -18,10 +18,15 @@ namespace IbraExport.Writers
 
             var surface = (Surface)obj.Geometry;
 
+            var brep = surface.ToBrep();
+
+            if (!brep.MakeValidForV2())
+                throw new Exception("Converting Surface to NURBS failed");
+
             var surfaceKey = obj.GetKey();
 
             var geometryItem = new Item($"{surfaceKey}.NurbsSurfaceGeometry3D", "NurbsSurfaceGeometry3D");
-            DumpNurbsSurface3D(geometryItem, surface.ToNurbsSurface(document.ModelAbsoluteTolerance, out var _));
+            DumpNurbsSurface3D(geometryItem, (NurbsSurface)brep.Surfaces[0]);
 
             var surfaceItem = new Item(surfaceKey, "Surface3D");
             surfaceItem.Set("geometry", geometryItem.Key);

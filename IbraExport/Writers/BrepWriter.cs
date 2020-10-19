@@ -18,11 +18,14 @@ namespace IbraExport.Writers
 
             var brep = (Brep)obj.Geometry;
 
+            if (!brep.MakeValidForV2())
+                throw new Exception("Converting Brep to NURBS failed");
+
             var brepKey = obj.GetKey();
 
             for (int i = 0; i < brep.Curves2D.Count; i++)
             {
-                var curve = brep.Curves2D[i].ToNurbsCurve();
+                var curve = (NurbsCurve)brep.Curves2D[i];
 
                 var curveItem = new Item($"{brepKey}.NurbsCurveGeometry2D<{i}>", "NurbsCurveGeometry2D");
                 DumpNurbsCurve2D(curveItem, curve);
@@ -32,7 +35,7 @@ namespace IbraExport.Writers
 
             for (int i = 0; i < brep.Surfaces.Count; i++)
             {
-                var surface = brep.Surfaces[i].ToNurbsSurface(document.ModelAbsoluteTolerance, out var _);
+                var surface = (NurbsSurface)brep.Surfaces[i];
                 
                 var surfaceItem = new Item($"{brepKey}.NurbsSurfaceGeometry3D<{i}>", "NurbsSurfaceGeometry3D");
                 DumpNurbsSurface3D(surfaceItem, surface);
