@@ -11,6 +11,32 @@ namespace IbraExport.Writers
 {
     class BrepWriter : Writer
     {
+        static int? MinPolynomialDegree(NurbsSurface surface)
+        {
+            var userString = surface.GetUserString("Ibra.MinPolynomialDegree");
+
+            if (userString != null)
+                return int.Parse(userString);
+
+            if (Info.Instance.Settings.GetBool("EnableMinPolynomialDegree", false))
+                return Info.Instance.Settings.GetInteger("MinPolynomialDegree", 1);
+
+            return null;
+        }
+
+        static double? MaxElementSize(NurbsSurface surface)
+        {
+            var userString = surface.GetUserString("Ibra.MaxElementSize");
+
+            if (userString != null)
+                return double.Parse(userString);
+
+            if (Info.Instance.Settings.GetBool("EnableMaxElementSize", false))
+                return Info.Instance.Settings.GetDouble("MaxElementSize", 10.0);
+
+            return null;
+        }
+
         public override bool TryDump(RhinoObject obj, Model model, RhinoDoc document)
         {
             if (obj.ObjectType != ObjectType.Brep)
@@ -38,7 +64,7 @@ namespace IbraExport.Writers
                 var surface = (NurbsSurface)brep.Surfaces[i];
                 
                 var surfaceItem = new Item($"{brepKey}.NurbsSurfaceGeometry3D<{i}>", "NurbsSurfaceGeometry3D");
-                DumpNurbsSurface3D(surfaceItem, surface);
+                DumpNurbsSurface3D(surfaceItem, surface, MinPolynomialDegree(surface), MaxElementSize(surface));
 
                 model.Items.Add(surfaceItem);
             }

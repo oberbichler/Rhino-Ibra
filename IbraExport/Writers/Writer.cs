@@ -31,6 +31,31 @@ namespace IbraExport.Writers
                 item.Set("weights", nurbsCurve.Points.Select(o => o.Weight));
         }
 
+        protected void DumpNurbsSurface3D(Item item, NurbsSurface nurbsSurface, int? minPolynomialDegree, double? maxElementSize)
+        {
+            if (minPolynomialDegree.HasValue)
+            {
+                nurbsSurface = (NurbsSurface)nurbsSurface.Duplicate();
+
+                nurbsSurface.IncreaseDegreeU(minPolynomialDegree.Value);
+                nurbsSurface.IncreaseDegreeV(minPolynomialDegree.Value);
+            }
+
+            if (maxElementSize.HasValue)
+                nurbsSurface = Utility.RefineSurface(nurbsSurface, maxElementSize.Value);
+
+            item.Set("degree_u", nurbsSurface.Degree(0));
+            item.Set("degree_v", nurbsSurface.Degree(1));
+            item.Set("knots_u", nurbsSurface.KnotsU);
+            item.Set("knots_v", nurbsSurface.KnotsV);
+            item.Set("nb_poles_u", nurbsSurface.Points.CountU);
+            item.Set("nb_poles_v", nurbsSurface.Points.CountV);
+            item.Set("poles", nurbsSurface.Points.Select(o => o.Location));
+
+            if (nurbsSurface.IsRational)
+                item.Set("weights", nurbsSurface.Points.Select(o => o.Weight));
+        }
+
         protected void DumpNurbsSurface3D(Item item, NurbsSurface nurbsSurface)
         {
             if (Info.Instance.Settings.GetBool("EnableMinPolynomialDegree", false))

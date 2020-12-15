@@ -26,6 +26,7 @@ jobs:
         run: |
           .\script\patch_assemblyinfo.ps1 -tag ${{ github.ref }} -path .\IbraExport
           .\script\patch_assemblyinfo.ps1 -tag ${{ github.ref }} -path .\IbraImport
+          .\script\patch_assemblyinfo.ps1 -tag ${{ github.ref }} -path .\IbraTools
       - name: Build
         run: |
           setlocal enabledelayedexpansion
@@ -36,7 +37,7 @@ jobs:
         shell: cmd
       - name: Create archive
         run: |
-          7z a -tzip Rhino-Ibra.zip ./IbraExport/bin/IbraExport.rhp ./IbraImport/bin/IbraImport.rhp ./IbraImport/bin/Newtonsoft.Json.dll
+          7z a -tzip Rhino-Ibra.zip ./IbraExport/bin/IbraExport.rhp ./IbraImport/bin/IbraImport.rhp ./IbraTools/bin/IbraTools.rhp ./IbraImport/bin/Newtonsoft.Json.dll
         shell: cmd
       - name: Upload archive
         uses: svenstaro/upload-release-action@v1-release
@@ -52,3 +53,4 @@ jobs:
         run: |
           .\script\deploy_yak.ps1 -tag ${{ github.ref }} -path .\IbraExport
           .\script\deploy_yak.ps1 -tag ${{ github.ref }} -path .\IbraImport
+          .\script\deploy_yak.ps1 -tag ${{ github.ref }} -path .\IbraTools
