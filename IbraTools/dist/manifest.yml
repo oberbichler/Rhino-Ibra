@@ -1,0 +1,9 @@
+﻿---
+name: IbraTools
+version: 1.0.0+0
+authors:
+- Thomas Oberbichler
+description: Import plugin for Isogeometric B-Rep Analysis
+url: https://github.com/oberbichler/Rhino-Ibra
+secret:
+  id: 56bcd31f-71dc-4932-99c3-520478b4b863
